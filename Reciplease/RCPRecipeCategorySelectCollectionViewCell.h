@@ -10,4 +10,8 @@
 
 @interface RCPRecipeCategorySelectCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *categoryParentView;
+
 @end

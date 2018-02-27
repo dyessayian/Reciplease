@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RCPCategoryCollectionViewCell" id="gTV-IL-0wX" customClass="RCPCategoryCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZZ-qP-DtB">
+                        <rect key="frame" x="10" y="10" width="60" height="60"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="category_final_1" translatesAutoresizingMaskIntoConstraints="NO" id="6eO-Nh-S4O">
+                                <rect key="frame" x="13.5" y="6" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="SKO-gw-dXW"/>
+                                    <constraint firstAttribute="height" constant="33" id="hfn-kP-DMy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="American" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="xld-ZO-JG0">
+                                <rect key="frame" x="10" y="42" width="41" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="jnJ-If-BL4"/>
+                                    <constraint firstAttribute="width" constant="41" id="pSG-Ew-PtD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.3411764705882353" green="0.3411764705882353" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xld-ZO-JG0" firstAttribute="centerX" secondItem="5ZZ-qP-DtB" secondAttribute="centerX" id="8dk-91-qOX"/>
+                            <constraint firstItem="xld-ZO-JG0" firstAttribute="top" secondItem="6eO-Nh-S4O" secondAttribute="bottom" constant="3" id="9kh-YN-Kye"/>
+                            <constraint firstItem="6eO-Nh-S4O" firstAttribute="centerY" secondItem="5ZZ-qP-DtB" secondAttribute="centerY" multiplier="0.75" id="mVP-S4-YBD"/>
+                            <constraint firstItem="6eO-Nh-S4O" firstAttribute="centerX" secondItem="5ZZ-qP-DtB" secondAttribute="centerX" id="sbC-yt-cE5"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="5ZZ-qP-DtB" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="XVM-LB-yJh"/>
+                <constraint firstItem="5ZZ-qP-DtB" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="a43-yr-bm0"/>
+                <constraint firstItem="5ZZ-qP-DtB" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-20" id="h9Z-xs-WEW"/>
+                <constraint firstItem="5ZZ-qP-DtB" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" constant="-20" id="ih7-bM-VPf"/>
+            </constraints>
+            <connections>
+                <outlet property="categoryImageView" destination="6eO-Nh-S4O" id="zES-qE-E5V"/>
+                <outlet property="categoryNameLabel" destination="xld-ZO-JG0" id="aCU-K5-cqk"/>
+                <outlet property="nameAndImageParentView" destination="5ZZ-qP-DtB" id="v6x-oX-44s"/>
+            </connections>
+            <point key="canvasLocation" x="26" y="52"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="category_final_1" width="16" height="17"/>
+    </resources>
+</document>

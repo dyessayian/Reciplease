@@ -1,0 +1,27 @@
+//
+//  RCPPrefixHeader.pch
+//  Reciplease
+//
+//  Created by Daniel Yessayian on 8/16/17.
+//  Copyright © 2017 Daniel Yessayian. All rights reserved.
+//
+
+#ifndef RCPPrefixHeader_pch
+#define RCPPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <MagicalRecord/MagicalRecord.h>
+#import "UIColor+RCPColors.h"
+#import "RCPRecipeCategory+CoreDataClass.h"
+#import "RCPRecipe+CoreDataClass.h"
+#import "RCPRecipeInstruction+CoreDataClass.h"
+#import "RCPRecipeIngredient+CoreDataClass.h"
+#import "RCPIngredient+CoreDataClass.h"
+#import "RCPRecipeTag+CoreDataClass.h"
+#import "RCPCoreDataManager.h"
+#import "RCPAppManager.h"
+#import "NSDateFormatter+RCPDateFormatter.h"
+
+#endif /* RCPPrefixHeader_pch */

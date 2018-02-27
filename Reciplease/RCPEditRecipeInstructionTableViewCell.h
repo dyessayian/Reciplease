@@ -10,4 +10,10 @@
 
 @interface RCPEditRecipeInstructionTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *stepNumberLabel;
+@property (weak, nonatomic) IBOutlet UITextView *instructionTextView;
+@property (weak, nonatomic) IBOutlet UIView *instructionParentView;
+@property (weak, nonatomic) IBOutlet UIImageView *xDeleteImageView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteOverlayButton;
+
 @end

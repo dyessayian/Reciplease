@@ -10,4 +10,9 @@
 
 @interface RCPEditRecipeTagTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *tagParentView;
+@property (weak, nonatomic) IBOutlet UITextField *tagTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *xDeleteImageView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteOverlayButton;
+
 @end

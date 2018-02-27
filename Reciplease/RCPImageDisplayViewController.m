@@ -8,7 +8,12 @@
 
 #import "RCPImageDisplayViewController.h"
 
-@interface RCPImageDisplayViewController ()
+@interface RCPImageDisplayViewController () <UIScrollViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *xCloseButton;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *imageParentView;
 
 @end
 
@@ -17,6 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self setupScrollView];
+    self.imageView.image = self.imageToDisplay;
+    self.imageParentView.layer.borderColor = [UIColor colorWithRed:36.0/255.0 green:36.0/255.0 blue:36.0/255.0 alpha:1].CGColor;
+    self.imageParentView.layer.borderWidth = 1.0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +34,31 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Helper Methods
+-(void)setupScrollView {
+    self.scrollView.multipleTouchEnabled = YES;
+    self.scrollView.minimumZoomScale = 1.0;
+    self.scrollView.maximumZoomScale = 4.0;
+    self.scrollView.delegate = self;
 }
-*/
+
+#pragma mark - Button Actions
+
+- (IBAction)closeButtonTapped:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(imageDisplayViewTappedClose)]){
+        [self.delegate imageDisplayViewTappedClose];
+    }
+    else {
+        //NSLog(@"Delegate does not respond to 'imageDisplayViewTappedClose'");
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+    
+    }];
+}
+
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageView;
+}
 
 @end

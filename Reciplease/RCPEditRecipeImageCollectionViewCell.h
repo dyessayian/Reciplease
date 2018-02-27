@@ -10,4 +10,7 @@
 
 @interface RCPEditRecipeImageCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *editRecipeImageView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteImageButton;
+
 @end

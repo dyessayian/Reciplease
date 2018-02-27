@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Thin</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RCPRecipeCollectionViewCell" id="gTV-IL-0wX" customClass="RCPRecipeCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="241" height="241"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="241" height="241"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creamyScallopSpaghetti" translatesAutoresizingMaskIntoConstraints="NO" id="mLJ-1c-iCO">
+                        <rect key="frame" x="0.0" y="0.0" width="241" height="241"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVO-El-ANp">
+                        <rect key="frame" x="222" y="199" width="9" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="9" id="Edp-9I-TUy"/>
+                            <constraint firstAttribute="height" constant="17" id="Ysk-BH-OHo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starNew" translatesAutoresizingMaskIntoConstraints="NO" id="YcK-2R-ijT">
+                        <rect key="frame" x="206" y="201.5" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="1a4-XR-yRT"/>
+                            <constraint firstAttribute="width" constant="12" id="EYD-US-LRm"/>
+                        </constraints>
+                    </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creamy Scallop Spaghetti" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="l3k-Sf-Lsd">
+                        <rect key="frame" x="10" y="194" width="182.5" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="HdT-rW-d8s"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Creamy Scallops! " adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ru3-6F-v0W">
+                        <rect key="frame" x="10" y="187" width="182" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="Qfb-n2-kpD"/>
+                        </constraints>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favHearWhite" translatesAutoresizingMaskIntoConstraints="NO" id="9DN-eV-rb7">
+                        <rect key="frame" x="10" y="160" width="22" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="VkT-No-qhC"/>
+                            <constraint firstAttribute="height" constant="18" id="tu8-Jf-NEE"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLm-jw-xF4">
+                        <rect key="frame" x="2" y="151" width="38.5" height="36"/>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="YcK-2R-ijT" firstAttribute="leading" secondItem="ru3-6F-v0W" secondAttribute="trailing" constant="14" id="0Jn-tS-ZcJ"/>
+                <constraint firstItem="uVO-El-ANp" firstAttribute="leading" secondItem="YcK-2R-ijT" secondAttribute="trailing" constant="4" id="1T5-Eb-b8t"/>
+                <constraint firstItem="fLm-jw-xF4" firstAttribute="centerY" secondItem="9DN-eV-rb7" secondAttribute="centerY" id="1ax-u7-jo3"/>
+                <constraint firstAttribute="bottom" secondItem="ru3-6F-v0W" secondAttribute="bottom" constant="10" id="3aS-g7-xHg"/>
+                <constraint firstAttribute="trailing" secondItem="mLJ-1c-iCO" secondAttribute="trailing" id="3bI-Af-yvy"/>
+                <constraint firstItem="mLJ-1c-iCO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5BU-a4-zci"/>
+                <constraint firstItem="ru3-6F-v0W" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="6Xl-w3-OFe"/>
+                <constraint firstItem="fLm-jw-xF4" firstAttribute="height" secondItem="9DN-eV-rb7" secondAttribute="height" multiplier="2" id="7DQ-Lv-ac2"/>
+                <constraint firstAttribute="bottom" secondItem="uVO-El-ANp" secondAttribute="bottom" constant="25" id="DzC-h5-efN"/>
+                <constraint firstItem="ru3-6F-v0W" firstAttribute="top" secondItem="9DN-eV-rb7" secondAttribute="bottom" constant="9" id="G0V-fy-gGJ"/>
+                <constraint firstAttribute="bottom" secondItem="mLJ-1c-iCO" secondAttribute="bottom" id="Hb6-ph-zJh"/>
+                <constraint firstItem="fLm-jw-xF4" firstAttribute="width" secondItem="9DN-eV-rb7" secondAttribute="width" multiplier="1.75" id="QgM-eU-tUh"/>
+                <constraint firstAttribute="bottom" secondItem="l3k-Sf-Lsd" secondAttribute="bottom" constant="12" id="Rv1-Om-HFN"/>
+                <constraint firstItem="l3k-Sf-Lsd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="T4n-hJ-KbY"/>
+                <constraint firstItem="mLJ-1c-iCO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="TdI-BE-BnK"/>
+                <constraint firstAttribute="trailing" secondItem="uVO-El-ANp" secondAttribute="trailing" constant="10" id="VvF-XD-6FI"/>
+                <constraint firstItem="fLm-jw-xF4" firstAttribute="centerX" secondItem="9DN-eV-rb7" secondAttribute="centerX" id="WCS-oT-SQk"/>
+                <constraint firstItem="YcK-2R-ijT" firstAttribute="leading" secondItem="l3k-Sf-Lsd" secondAttribute="trailing" constant="14" id="Zdv-ln-VD7"/>
+                <constraint firstItem="YcK-2R-ijT" firstAttribute="centerY" secondItem="uVO-El-ANp" secondAttribute="centerY" id="ip1-5A-5i7"/>
+                <constraint firstItem="9DN-eV-rb7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="soG-f1-43G"/>
+            </constraints>
+            <size key="customSize" width="218" height="208"/>
+            <connections>
+                <outlet property="favoriteHeartButton" destination="fLm-jw-xF4" id="y7u-ml-QCe"/>
+                <outlet property="favoriteHeartImageView" destination="9DN-eV-rb7" id="TyX-Ce-GVZ"/>
+                <outlet property="ratingNumberLabel" destination="uVO-El-ANp" id="PYr-TB-7nA"/>
+                <outlet property="ratingStarImageView" destination="YcK-2R-ijT" id="jTs-OC-8bO"/>
+                <outlet property="recipeImageView" destination="mLJ-1c-iCO" id="Ss7-pS-Znj"/>
+                <outlet property="recipeNameLabel" destination="l3k-Sf-Lsd" id="d29-iI-XHF"/>
+                <outlet property="recipeNameTextView" destination="ru3-6F-v0W" id="wBF-yH-pTA"/>
+                <outlet property="recipeNameTextViewHeightConstraint" destination="Qfb-n2-kpD" id="ZH7-Jm-PEN"/>
+            </connections>
+            <point key="canvasLocation" x="-140.5" y="17.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="creamyScallopSpaghetti" width="720" height="405"/>
+        <image name="favHearWhite" width="25" height="22"/>
+        <image name="starNew" width="13" height="13"/>
+    </resources>
+</document>

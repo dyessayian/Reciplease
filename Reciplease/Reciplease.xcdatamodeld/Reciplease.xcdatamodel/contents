@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="RCPIngredient" representedClassName="RCPIngredient" syncable="YES">
+        <attribute name="ingredientName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipeIngredient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RCPRecipeIngredient" inverseName="ingredient" inverseEntity="RCPRecipeIngredient" syncable="YES"/>
+    </entity>
+    <entity name="RCPRecipe" representedClassName="RCPRecipe" syncable="YES">
+        <attribute name="recipeIsFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="recipeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recipeNotes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recipeRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RCPRecipeCategory" inverseName="recipes" inverseEntity="RCPRecipeCategory" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RCPRecipeImage" inverseName="recipe" inverseEntity="RCPRecipeImage" syncable="YES"/>
+        <relationship name="instructions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RCPRecipeInstruction" inverseName="recipe" inverseEntity="RCPRecipeInstruction" syncable="YES"/>
+        <relationship name="recipeIngredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RCPRecipeIngredient" inverseName="recipe" inverseEntity="RCPRecipeIngredient" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RCPRecipeTag" inverseName="recipe" inverseEntity="RCPRecipeTag" syncable="YES"/>
+    </entity>
+    <entity name="RCPRecipeCategory" representedClassName="RCPRecipeCategory" syncable="YES">
+        <attribute name="categoryID" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RCPRecipe" inverseName="categories" inverseEntity="RCPRecipe" syncable="YES"/>
+    </entity>
+    <entity name="RCPRecipeImage" representedClassName="RCPRecipeImage" syncable="YES">
+        <attribute name="isFeatured" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="recipeImageName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RCPRecipe" inverseName="images" inverseEntity="RCPRecipe" syncable="YES"/>
+    </entity>
+    <entity name="RCPRecipeIngredient" representedClassName="RCPRecipeIngredient" syncable="YES">
+        <attribute name="ingredientMeasurement" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ingredientNumber" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ingredientQuantity" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="ingredient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RCPIngredient" inverseName="recipeIngredient" inverseEntity="RCPIngredient" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RCPRecipe" inverseName="recipeIngredients" inverseEntity="RCPRecipe" syncable="YES"/>
+    </entity>
+    <entity name="RCPRecipeInstruction" representedClassName="RCPRecipeInstruction" syncable="YES">
+        <attribute name="instructionNumber" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="instructionText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RCPRecipe" inverseName="instructions" inverseEntity="RCPRecipe" syncable="YES"/>
+    </entity>
+    <entity name="RCPRecipeTag" representedClassName="RCPRecipeTag" syncable="YES">
+        <attribute name="tagNumber" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tagString" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RCPRecipe" inverseName="tags" inverseEntity="RCPRecipe" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RCPIngredient" positionX="405" positionY="-199" width="128" height="73"/>
+        <element name="RCPRecipe" positionX="-36" positionY="-387" width="128" height="180"/>
+        <element name="RCPRecipeCategory" positionX="-254" positionY="-216" width="128" height="103"/>
+        <element name="RCPRecipeIngredient" positionX="223" positionY="-261" width="128" height="120"/>
+        <element name="RCPRecipeInstruction" positionX="-27" positionY="-18" width="128" height="88"/>
+        <element name="RCPRecipeTag" positionX="-72" positionY="-576" width="128" height="90"/>
+        <element name="RCPRecipeImage" positionX="-54" positionY="-432" width="128" height="90"/>
+    </elements>
+</model>

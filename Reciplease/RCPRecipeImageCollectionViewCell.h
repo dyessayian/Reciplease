@@ -10,4 +10,6 @@
 
 @interface RCPRecipeImageCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *recipeImageView;
+
 @end

@@ -1,21 +1,73 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="RCPEditRecipeImageCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RCPEditRecipeImageCollectionViewCell" id="gTV-IL-0wX" customClass="RCPEditRecipeImageCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="61" height="61"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                <rect key="frame" x="0.0" y="0.0" width="61" height="61"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7mh-8J-GOz">
+                        <rect key="frame" x="0.0" y="0.0" width="61" height="61"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-8Z-q4j">
+                        <rect key="frame" x="36.5" y="0.0" width="24.5" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="JOv-8Z-q4j" secondAttribute="height" multiplier="1:1" id="PLg-d0-qOg"/>
+                        </constraints>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOz-Bh-Odj">
+                        <rect key="frame" x="36.5" y="0.0" width="24.5" height="25"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="7mh-8J-GOz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1aR-hf-Sjq"/>
+                <constraint firstAttribute="bottom" secondItem="7mh-8J-GOz" secondAttribute="bottom" id="DOC-Yc-Da8"/>
+                <constraint firstItem="JOv-8Z-q4j" firstAttribute="width" secondItem="SEy-5g-ep8" secondAttribute="width" multiplier="1:2.5" id="Rjd-QW-Pdc"/>
+                <constraint firstItem="7mh-8J-GOz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="eQc-pS-Myj"/>
+                <constraint firstItem="JOv-8Z-q4j" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ho4-2Z-Xkg"/>
+                <constraint firstAttribute="trailing" secondItem="JOv-8Z-q4j" secondAttribute="trailing" id="jCn-8O-Fec"/>
+                <constraint firstAttribute="trailing" secondItem="7mh-8J-GOz" secondAttribute="trailing" id="n8c-Na-B0Q"/>
+                <constraint firstAttribute="trailing" secondItem="fOz-Bh-Odj" secondAttribute="trailing" id="oVg-xw-HFt"/>
+                <constraint firstItem="fOz-Bh-Odj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pyo-mw-vT9"/>
+                <constraint firstItem="fOz-Bh-Odj" firstAttribute="height" secondItem="JOv-8Z-q4j" secondAttribute="height" id="vIR-nk-7dR"/>
+                <constraint firstItem="fOz-Bh-Odj" firstAttribute="width" secondItem="JOv-8Z-q4j" secondAttribute="width" id="wsl-YY-fPE"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="128" height="123"/>
+            <connections>
+                <outlet property="deleteImageButton" destination="JOv-8Z-q4j" id="jXM-cj-2Bo"/>
+                <outlet property="editRecipeImageView" destination="7mh-8J-GOz" id="0tc-TV-39F"/>
+            </connections>
+            <point key="canvasLocation" x="63.5" y="88.5"/>
         </collectionViewCell>
     </objects>
 </document>

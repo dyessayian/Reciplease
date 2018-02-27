@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RCPRecipeIngredientTableViewCell" rowHeight="36" id="KGk-i7-Jjw" customClass="RCPRecipeIngredientTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="325" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="parmesan cheese" placeholder="-" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ol7-oN-Tnt">
+                        <rect key="frame" x="126" y="8" width="191" height="27.5"/>
+                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ounces" placeholder="-" textAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="DJH-g7-DkF">
+                        <rect key="frame" x="38" y="8" width="80" height="27.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="4Vh-x1-T4U"/>
+                        </constraints>
+                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="15" placeholder="-" textAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="2nO-fk-2rm">
+                        <rect key="frame" x="0.0" y="8" width="30" height="27.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="t0A-9p-Adh"/>
+                        </constraints>
+                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                    </textField>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="DJH-g7-DkF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="2q5-vS-kyF"/>
+                    <constraint firstAttribute="trailing" secondItem="ol7-oN-Tnt" secondAttribute="trailing" constant="8" id="67U-8S-wrw"/>
+                    <constraint firstItem="DJH-g7-DkF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7ow-58-KVt"/>
+                    <constraint firstItem="ol7-oN-Tnt" firstAttribute="leading" secondItem="DJH-g7-DkF" secondAttribute="trailing" constant="8" id="My1-J5-dq5"/>
+                    <constraint firstItem="2nO-fk-2rm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Q9v-Wv-Wlw"/>
+                    <constraint firstItem="ol7-oN-Tnt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UPB-Yl-sml"/>
+                    <constraint firstItem="ol7-oN-Tnt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="UmK-Ue-FNZ"/>
+                    <constraint firstItem="DJH-g7-DkF" firstAttribute="leading" secondItem="2nO-fk-2rm" secondAttribute="trailing" constant="8" id="Zui-pQ-ldd"/>
+                    <constraint firstItem="2nO-fk-2rm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gT9-2b-D3k"/>
+                    <constraint firstAttribute="bottom" secondItem="DJH-g7-DkF" secondAttribute="bottom" constant="8" id="hBK-dv-7AV"/>
+                    <constraint firstAttribute="bottom" secondItem="ol7-oN-Tnt" secondAttribute="bottom" constant="8" id="nlo-in-7JT"/>
+                    <constraint firstAttribute="bottom" secondItem="2nO-fk-2rm" secondAttribute="bottom" constant="8" id="pey-nh-QIA"/>
+                    <constraint firstItem="2nO-fk-2rm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="rlP-m8-31y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="ingredientNameTextField" destination="ol7-oN-Tnt" id="rQd-JO-fn0"/>
+                <outlet property="measurementTypeTextField" destination="DJH-g7-DkF" id="8iD-PQ-mF2"/>
+                <outlet property="quantityTextField" destination="2nO-fk-2rm" id="09s-2a-c4c"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="52"/>
+        </tableViewCell>
+    </objects>
+</document>
