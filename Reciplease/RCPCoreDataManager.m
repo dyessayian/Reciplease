@@ -1912,8 +1912,6 @@
     }
 }
 
-
-
 #pragma mark - Build #2
 -(void)applyBuild2Patch {
     
@@ -1985,8 +1983,6 @@
             sweetAndSourPorkRecipe.recipeNotes = sweetAndSourPorkNewNotesText;
         }
     }
-    
-    
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 

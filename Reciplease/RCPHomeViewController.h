@@ -10,18 +10,12 @@
 
 @protocol RCPHomeViewControllerDelegate;
 
-
 @interface RCPHomeViewController : UIViewController
 
-
 @property (nonatomic, weak) id<RCPHomeViewControllerDelegate>delegate;
-
-
 
 @end
 
 @protocol RCPHomeViewControllerDelegate <NSObject>
-
 @optional
-
 @end

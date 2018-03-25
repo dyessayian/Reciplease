@@ -15,7 +15,6 @@
 -(void)prepareForDeletion {
     
     //NSLog(@"%@: prepareForDeletion.  Deleting any local files associated to this object.", self.class);
-    
     NSString *pathForFile = [[RCPAppManager sharedInstance] retrievePathForFilenameWithString:self.recipeImageName];
     if (pathForFile.length > 0){
         NSFileManager *fileManager = [NSFileManager defaultManager];

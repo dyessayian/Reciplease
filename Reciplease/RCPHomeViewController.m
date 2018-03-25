@@ -12,7 +12,6 @@
 #import "RCPViewRecipeViewController.h"
 #import "RCPEditRecipeViewController.h"
 
-
 @interface RCPHomeViewController () <RCPEditRecipeViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, RCPViewRecipeViewControllerDelegate>
 
 //Parent Views
@@ -58,7 +57,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [self addObservers];
     [self setupFonts];
     [self setupCollectionView];
@@ -68,15 +66,10 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    
     [self reloadRecipes];
 }
 
@@ -107,7 +100,6 @@
     self.favoriteHeartImageView.image = favoritesFilterOn ? [UIImage imageNamed:@"favHeartRed"] : [UIImage imageNamed:@"favHearGrey"];
 }
 
-
 -(void)setupFonts {
     self.activeCategoryFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14.0];
     self.inactiveCategoryFont = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
@@ -120,8 +112,6 @@
 }
 
 -(void)reloadRecipes {
-    
-    
     RCPRecipeCategory *selectedCategory = [self.categoriesArray objectAtIndex:self.selectedCategoryIndexPath.row];
     if ([selectedCategory.categoryName isEqualToString:@"All"]){
         if (self.favoritesFilterOn){
@@ -152,9 +142,7 @@
         return [obj1.recipeName compare:obj2.recipeName];
     }] mutableCopy];
     
-    //NSLog(@"Search Recipes: %@", self.searchRecipesArray);
     [self.recipesCollectionView reloadData];
-    
 }
 
 -(void)reloadCategories {
@@ -176,7 +164,6 @@
     else {
         self.currentCategoryLabel.text = @"No Categories";
     }
-    ////NSLog(@"Selected recipe category: %@", selectedCategory.categoryName);
     [self.recipeCategoryCollectionView reloadData];
 }
 
@@ -184,11 +171,8 @@
     
     self.selectedCategoryIndexPath = nil;
     self.previousCategoryIndexPath = nil;
-    
     [self.recipeCategoryCollectionView registerNib:[UINib nibWithNibName:@"RCPCategoryCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:NSStringFromClass([RCPCategoryCollectionViewCell class])];
-    
     [self.recipesCollectionView registerNib:[UINib nibWithNibName:@"RCPRecipeCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:NSStringFromClass([RCPRecipeCollectionViewCell class])];
-    
     self.categoriesArray = [NSMutableArray new];
     self.recipesArray = [NSMutableArray new];
     
@@ -204,17 +188,12 @@
     if (self.categoriesArray.count > 0){
         [self.recipeCategoryCollectionView selectItemAtIndexPath:self.selectedCategoryIndexPath animated:NO scrollPosition:UICollectionViewScrollPositionLeft];
     }
-    
-    //NSLog(@"Recipes array: %ld", self.recipesArray.count);
 }
-
 
 #pragma mark - Button Actions
 - (IBAction)addRecipeButtonTapped:(UIButton *)sender {
     //NSLog(@"Add recipe button tapped.");
-    
     [self performSegueWithIdentifier:@"addRecipeSegue" sender:nil];
-    
 }
 
 - (IBAction)viewFavoritesButtonTapped:(UIButton *)sender {
@@ -224,15 +203,12 @@
 }
 
 -(void)didToggleRecipeFavorite:(UIButton*)sender {
-    
     RCPRecipe *selectedRecipe = [self.recipesArray objectAtIndex:sender.tag];
     //NSLog(@"Did toggle favorite for recipe: %@", selectedRecipe.recipeName);
     selectedRecipe.recipeIsFavorite = !selectedRecipe.recipeIsFavorite;
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
     [self.recipesCollectionView reloadData];
 }
-
-
 
 #pragma mark - UICollectionView Delegate
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,48 +248,32 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     if ([collectionView isEqual:self.recipeCategoryCollectionView]){
         RCPCategoryCollectionViewCell *cell = (RCPCategoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([RCPCategoryCollectionViewCell class]) forIndexPath:indexPath];
         RCPRecipeCategory *category = [self.categoriesArray objectAtIndex:indexPath.row];
         
         cell.categoryNameLabel.text = category.categoryName.length > 0 ? category.categoryName : @"?";
         cell.backgroundColor = [UIColor clearColor];
-        //cell.backgroundColor = [UIColor orangeColor];
-        
-        //cell.categoryImageView.transform = CGAffineTransformIdentity;
         cell.nameAndImageParentView.transform = CGAffineTransformIdentity;
         
-        
         if ([self.selectedCategoryIndexPath isEqual:indexPath]){
-            //cell.categoryImageView.transform = CGAffineTransformScale(cell.categoryImageView.transform, 1.6, 1.6);
             cell.nameAndImageParentView.transform = CGAffineTransformScale(cell.nameAndImageParentView.transform, 1.4, 1.4);
-            
-            
             cell.categoryImageView.image = [UIImage imageNamed:category.imageName]; //Set to active image.
             cell.categoryImageView.tintColor = [UIColor colorNamed:@"activeCategoryImageColor"];
-            
             cell.categoryNameLabel.font = self.activeCategoryFont;
             cell.categoryNameLabel.textColor = [UIColor colorNamed:@"activeCategoryGrey"];
         }
         else {
-            //cell.categoryImageView.transform = CGAffineTransformIdentity;
             cell.nameAndImageParentView.transform = CGAffineTransformIdentity;
-            
-            
             cell.categoryImageView.image = [UIImage imageNamed:category.imageName]; //Set to active image.
-            //cell.categoryImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_inactive", category.imageName]];
             cell.categoryImageView.tintColor = [UIColor colorNamed:@"inactiveCategoryImageColor"];
-            
             cell.categoryNameLabel.font = self.inactiveCategoryFont;
             cell.categoryNameLabel.textColor = [UIColor colorNamed:@"inactiveCategoryGrey"];
         }
-        
         return cell;
     }
     else {
         RCPRecipeCollectionViewCell *cell = (RCPRecipeCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([RCPRecipeCollectionViewCell class]) forIndexPath:indexPath];
-        
         RCPRecipe *recipe;
         if (self.searchTextField.text.length > 0){
             recipe = [self.searchRecipesArray objectAtIndex:indexPath.row];
@@ -329,10 +289,7 @@
         cell.recipeNameTextView.textContainer.lineFragmentPadding = 0;
         
         float recipeNameHeightThatFits = MIN([cell.recipeNameTextView sizeThatFits:CGSizeMake(cell.recipeNameTextView.frame.size.width, FLT_MAX)].height, 44);
-        //NSLog(@"Fits: %f", recipeNameHeightThatFits);
         cell.recipeNameTextViewHeightConstraint.constant = recipeNameHeightThatFits;
-        
-        
         cell.favoriteHeartButton.tag = indexPath.row;
         [cell.favoriteHeartButton addTarget:self action:@selector(didToggleRecipeFavorite:) forControlEvents:UIControlEventTouchUpInside];
         cell.favoriteHeartImageView.image = recipe.recipeIsFavorite ? [UIImage imageNamed:@"favHeartRed"] : [UIImage imageNamed:@"favHeartWhite"];
@@ -375,11 +332,7 @@
             }
         }
         
-        
-        
-        
         cell.backgroundColor = [UIColor clearColor];
-        
         
         //Remove previous sublayers.
         for (CALayer* layer in cell.recipeImageView.layer.sublayers){
@@ -389,12 +342,10 @@
         //Add Alpha Gradient over messagePreviewLabel
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.frame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
-        //NSLog(@"Adding gradient at frame: %@", NSStringFromCGRect(gradient.frame));
         gradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:1 green:1 blue:1 alpha:0].CGColor, [UIColor colorWithRed:74/255 green:74/255 blue:74/255 alpha:0], (id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.77] CGColor], nil];
         gradient.startPoint = CGPointMake(1.0f, 0.0f);
         gradient.endPoint = CGPointMake(1.0f, 1.0f);
         [cell.recipeImageView.layer insertSublayer:gradient atIndex:0];
-        
         
         return cell;
     }
@@ -404,9 +355,7 @@
     if ([collectionView isEqual:self.recipeCategoryCollectionView]){
         if (!self.performingCollectionCategoryViewAnimations){
             
-            
             RCPRecipeCategory *selectedCategory = [self.categoriesArray objectAtIndex:indexPath.row];
-            
             //NSLog(@"Selected recipe category: %@", selectedCategory.categoryName);
             self.currentCategoryLabel.text = selectedCategory.categoryName.length > 0 ? selectedCategory.categoryName : @"";
             
@@ -420,17 +369,12 @@
                 RCPCategoryCollectionViewCell *selectedCategoryCell = (RCPCategoryCollectionViewCell*)[self.recipeCategoryCollectionView cellForItemAtIndexPath:self.selectedCategoryIndexPath];
                 RCPCategoryCollectionViewCell *previousCategoryCell = (RCPCategoryCollectionViewCell*)[self.recipeCategoryCollectionView cellForItemAtIndexPath:self.previousCategoryIndexPath];
                 
-                
                 //Set image to active for new selection, and set inactive for old selection.
                 RCPRecipeCategory *previousCategory = [self.categoriesArray objectAtIndex:self.previousCategoryIndexPath.row];
-                
-                
                 selectedCategoryCell.categoryImageView.image = [UIImage imageNamed:selectedCategory.imageName]; //Set to active image.
                 selectedCategoryCell.categoryImageView.tintColor = [UIColor colorNamed:@"activeCategoryImageColor"];
                 previousCategoryCell.categoryImageView.image = [UIImage imageNamed:previousCategory.imageName];
                 previousCategoryCell.categoryImageView.tintColor = [UIColor colorNamed:@"inactiveCategoryImageColor"];
-                
-                //previousCategoryCell.categoryImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_inactive", previousCategory.imageName]];
                 
                 //Set fonts and colors for active vs. inactive
                 selectedCategoryCell.categoryNameLabel.font = self.activeCategoryFont;
@@ -438,15 +382,10 @@
                 previousCategoryCell.categoryNameLabel.font = self.inactiveCategoryFont;
                 previousCategoryCell.categoryNameLabel.textColor = [UIColor colorNamed:@"inactiveCategoryGrey"];
                 
-                
-                
                 //Shrink animation for previous cell, if necessary.
                 if (previousCategoryCell && previousCategoryCell != selectedCategoryCell){
                     [UIView animateWithDuration:0.3 animations:^{
-                        //previousCategoryCell.categoryImageView.transform = CGAffineTransformIdentity;
                         previousCategoryCell.nameAndImageParentView.transform = CGAffineTransformIdentity;
-                        
-                        
                     } completion:^(BOOL finished) {
                     }];
                 }
@@ -454,10 +393,7 @@
                 //Grow animation for the selected category.
                 self.performingCollectionCategoryViewAnimations = TRUE;
                 [UIView animateWithDuration:0.3 animations:^{
-                    //selectedCategoryCell.categoryImageView.transform = CGAffineTransformScale(selectedCategoryCell.categoryImageView.transform, 1.6, 1.6);
                     selectedCategoryCell.nameAndImageParentView.transform = CGAffineTransformScale(selectedCategoryCell.nameAndImageParentView.transform, 1.4, 1.4);
-                    
-                    
                 } completion:^(BOOL finished) {
                     self.performingCollectionCategoryViewAnimations = FALSE;
                     [self.recipeCategoryCollectionView reloadData];
@@ -465,11 +401,9 @@
                 
                 //Filter the recipes.
                 [self filterRecipesBySelectedCategory];
-                
             }
             else {
                 //Selected the same index, don't do anything in this case.
-                //NSLog(@"Selected the same index.  Not performing grow.");
                 self.performingCollectionCategoryViewAnimations = FALSE;
                 [self.recipeCategoryCollectionView reloadData];
             }
@@ -479,10 +413,8 @@
         }
     }
     else if ([collectionView isEqual:self.recipesCollectionView]){
-        //NSLog(@"Selected recipe!");
         RCPRecipe *selectedRecipe = [self.recipesArray objectAtIndex:indexPath.row];
         //NSLog(@"Selected Recipe: %@", selectedRecipe.recipeName);
-        
         self.selectedRecipe = selectedRecipe;
         [self performSegueWithIdentifier:@"viewRecipeSegue" sender:nil];
     }
@@ -534,8 +466,6 @@
         RCPRecipeInstruction *newInstruction = [RCPRecipeInstruction MR_createEntityInContext:[RCPCoreDataManager sharedInstance].creatingRecipeContext];
         newInstruction.instructionNumber = @(1);
         [creatingRecipe addInstructionsObject:newInstruction];
-        
-        
     }
     else if ([segue.identifier isEqualToString:@"viewRecipeSegue"]){
         RCPViewRecipeViewController *viewRecipeVC = [segue destinationViewController];
@@ -587,16 +517,9 @@
 }
 
 #pragma mark - Testing
-
 - (IBAction)testButtonTapped:(UIButton *)sender {
     //NSLog(@"reloading");
-    
-    
     [self.recipesCollectionView reloadData];
-    
-    
-
-    
 }
 
 @end

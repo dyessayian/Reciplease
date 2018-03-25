@@ -22,9 +22,7 @@
     if(self = [super init]) {
         //Initialization
         self.appColorsArray = [NSMutableArray arrayWithObjects:[UIColor RCPBlueColor], [UIColor RCPGreenColor], [UIColor RCPPeachColor], [UIColor RCPYellowColor], [UIColor RCPTurquoiseColor], [UIColor RCPGoldColor], [UIColor RCPLightBrownColor], nil];
-        
         self.measurementTypesArray = [NSMutableArray arrayWithObjects:@"cup", @"clove", @"dash", @"drop", @"fl oz", @"gallon", @"gram", @"kg", @"lb", @"liter", @"mg", @"oz", @"piece", @"pinch", @"pint", @"quart", @"sheet", @"shot", @"tbsp", @"tsp", nil];
-        
     } return self;
 }
 
@@ -46,7 +44,7 @@
 
 #pragma mark - Other
 - (NSString*) retrievePathForFilenameWithString:(NSString*)filename {
-    
+    //Helper method to retrieve the path for a given filename.
     if (filename.length == 0){
         return @""; //If no filename was sent, can't find a path.
     }

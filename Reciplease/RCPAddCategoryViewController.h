@@ -11,15 +11,10 @@
 @protocol RCPAddCategoryViewControllerDelegate;
 
 @interface RCPAddCategoryViewController : UIViewController
-
 @property (weak, nonatomic) id<RCPAddCategoryViewControllerDelegate>delegate;
-
 @end
 
 @protocol RCPAddCategoryViewControllerDelegate <NSObject>
-
 @optional
-
 -(void)categoryWasAdded:(RCPRecipeCategory*)addedCategory;
-
 @end

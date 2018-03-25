@@ -92,7 +92,6 @@
     // Do any additional setup after loading the view.
     
     self.contextToUse = self.addingRecipe ? [RCPCoreDataManager sharedInstance].creatingRecipeContext : [NSManagedObjectContext MR_defaultContext];
-    
     [self addObservers];
     [self setupTableViews];
     [self setupCollectionView];
@@ -111,8 +110,6 @@
         [self.recipeNameTextField becomeFirstResponder];
         [self.recipeNameTextField resignFirstResponder];
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -212,7 +209,6 @@
     self.notesTextView.text = self.recipe.recipeNotes.length > 0 ? self.recipe.recipeNotes : @"";
     self.notesParentView.layer.borderColor = [UIColor colorWithRed:216.0/255.0 green:216.0/255.0 blue:216.0/255.0 alpha:1.0].CGColor;
     self.notesParentView.layer.borderWidth = 1.0;
-    
     self.notesTextView.text = self.recipe.recipeNotes.length > 0 ? self.recipe.recipeNotes : @"";
     float notesTextViewHeight = 0.0;
     notesTextViewHeight += ceilf([self.notesTextView sizeThatFits:CGSizeMake(self.notesTextView.frame.size.width, FLT_MAX)].height + 12 + 12);
@@ -236,7 +232,6 @@
         self.noImagesPlaceholderImageView.hidden = YES;
         self.recipeImagesCollectionView.hidden = NO;
     }
-    
     [self reloadDefaultRecipeImage];
 }
 
@@ -341,7 +336,6 @@
 #pragma mark - Button Actions
 - (IBAction)saveButtonTapped:(UIButton *)sender {
     //NSLog(@"Save recipe button tapped.");
-    
     //NSLog(@"💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚💚");
     //NSLog(@"The current recipe:");
     //NSLog(@"%@", self.recipe);
@@ -350,11 +344,8 @@
     [self.view endEditing:YES];
     if (self.recipe.recipeName.length > 0){
         
-        
         [[RCPCoreDataManager sharedInstance].creatingRecipeContext MR_saveToPersistentStoreAndWait];
-        
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        
         if (self.addingRecipe){
             if ([self.delegate respondsToSelector:@selector(recipeWasAdded:)]){
                 [self.delegate recipeWasAdded:self.recipe];
@@ -371,11 +362,9 @@
                 //NSLog(@"Delegate does not respond to selector: recipeWasUpdated:");
             }
         }
-        
         [self dismissViewControllerAnimated:YES completion:^{
             //NSLog(@"Dismissed add recipe view controller.");
         }];
-        
     }
     else {
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Missing Recipe Name" message:[NSString stringWithFormat:@"Please fill out a name for this recipe."] preferredStyle:UIAlertControllerStyleAlert];
@@ -393,9 +382,7 @@
                                                           }];
     UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"Yes, Discard" style:UIAlertActionStyleDestructive
                                                       handler:^(UIAlertAction *action) {
-                                                          
                                                           //NSLog(@"Tapped Discard.");
-                                                          
                                                           [RCPCoreDataManager sharedInstance].creatingRecipeContext = nil;
                                                           
                                                           //Reset.
@@ -422,25 +409,16 @@
         self.addCategoryVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RCPAddCategoryViewController"];
         self.addCategoryVC.delegate = self;
     }
-    
-    //NSLog(@"Add category VC: %@", NSStringFromCGRect(self.addCategoryVC.view.frame));
-    
+
     self.definesPresentationContext = YES;
-    
     [self presentViewController:self.addCategoryVC animated:YES completion:^{
         //NSLog(@"Presented!");
         //NSLog(@"Add category VC: %@", NSStringFromCGRect(self.addCategoryVC.view.frame));
         //self.addCategoryVC.view.frame = CGRectMake(0, 0, 944, 327);
     }];
-
-    
-    
-    
 }
 
-
 - (IBAction)addIngredientButtonTapped:(UIButton *)sender {
-
     [self.view endEditing:YES];
     
     //Create a new recipe ingredient object & ingredient object.
@@ -454,7 +432,6 @@
 }
 
 - (IBAction)addInstructionButtonTapped:(UIButton *)sender {
-    
     [self.view endEditing:YES];
     
     //Create a new recipe instruction.
@@ -474,10 +451,8 @@
         textField.placeholder = @"tag";
     }];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
         NSString *tagEntered = [[alertController textFields][0] text];
         //NSLog(@"Tag entered: %@", tagEntered);
-        
         if (tagEntered.length > 0){
             //Also check if the tag doesn't already exist for this recipe.
             RCPRecipeTag *existingTag = [[self.recipe.tags.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"tagString == %@", tagEntered]] firstObject];
@@ -564,11 +539,7 @@
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
-    
-    
-    
 }
-
 
 - (IBAction)cancelButtonTapped:(UIButton *)sender {
     //NSLog(@"Cancel Recipe!");
@@ -624,8 +595,7 @@
     }
 }
 
--(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
-{
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
     CGPoint pressPoint = [gestureRecognizer locationInView:self.selectCategoryCollectionView];
     NSIndexPath *indexPath = [self.selectCategoryCollectionView indexPathForItemAtPoint:pressPoint];
     if (indexPath == nil){
@@ -633,10 +603,7 @@
     }
     else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         //NSLog(@"long press on table view at row %ld", indexPath.row);
-        
-        
         //NSLog(@"Ask to delete category: %@", [self.selectCategoriesArray objectAtIndex:indexPath.row]);
-        
         RCPRecipeCategory *deleteCategory = [self.selectCategoriesArray objectAtIndex:indexPath.row];
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Delete Category?" message:[NSString stringWithFormat:@"Would you like to delete the category '%@'?", deleteCategory.categoryName] preferredStyle:UIAlertControllerStyleAlert];
@@ -673,7 +640,6 @@
         lpgr.minimumPressDuration = 1.0; //seconds
         [cell addGestureRecognizer:lpgr];
         
-        
         RCPRecipeCategory *category = [self.selectCategoriesArray objectAtIndex:indexPath.row];
         cell.categoryNameLabel.text = category.categoryName.length > 0 ? category.categoryName : @"?";
         cell.categoryImageView.image = [UIImage imageNamed:category.imageName];
@@ -696,10 +662,7 @@
     else { // if ([collectionView isEqual:self.recipeImagesCollectionView]){
     
         RCPEditRecipeImageCollectionViewCell *cell = (RCPEditRecipeImageCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([RCPEditRecipeImageCollectionViewCell class]) forIndexPath:indexPath];
-        
         RCPRecipeImage *recipeImage = [self.recipeImagesArray objectAtIndex:indexPath.row];
-        
-        
         
         //NSLog(@"Loading image: %@", recipeImage.recipeImageName);
         UIImage *image = [UIImage imageNamed:recipeImage.recipeImageName];
@@ -718,11 +681,9 @@
             }
         }
         
-        
         cell.deleteImageButton.transform = CGAffineTransformIdentity;
         cell.deleteImageButton.transform = CGAffineTransformRotate(cell.deleteImageButton.transform, M_PI_4);
         [cell.deleteImageButton.imageView setTintColor:[UIColor redColor]];
-        
         cell.deleteImageButton.tag = indexPath.row;
         [cell.deleteImageButton addTarget:self action:@selector(deleteRecipeImageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -742,21 +703,10 @@
         
         return cell;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
-
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"collectionView:didSelectItemAtIndexPath: %@ (Row: %ld)", indexPath, (long)indexPath.row);
-
     if ([collectionView isEqual:self.selectCategoryCollectionView]){
         //Toggle the category as selected.
         RCPRecipeCategory *recipeCategory = [self.selectCategoriesArray objectAtIndex:indexPath.row];
@@ -772,11 +722,7 @@
         }
     }
     else if ([collectionView isEqual:self.recipeImagesCollectionView]){
-        
-        //NSLog(@"Beep.");
-        
         //Prompt user to set image as default.
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Set as Cover?" message:[NSString stringWithFormat:@"Would you like to set this image as the cover image for this recipe?"] preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
@@ -793,10 +739,7 @@
                                                                   RCPRecipeImage *selectedImage = [self.recipeImagesArray objectAtIndex:indexPath.row];
                                                                   selectedImage.isFeatured = YES;
                                                                   
-                                                                  
                                                                   [self reloadDefaultRecipeImage];
-                                                                  
-                                                                  
                                                               }];
             [alertController addAction:cancelAction];
             [alertController addAction:okAction];
@@ -827,29 +770,6 @@
         return 0;
     }
 }
-
-//
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([tableView isEqual:self.ingredientsTableView]){
-//        return 46.0;
-//    }
-////    else if ([tableView isEqual:self.instructionsTableView]){
-////
-////        //This needs to be done using automatic dimension?
-////
-////
-//////        float instructionHeight = 0.0;
-////        //RCPEditRecipeInstructionTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-////
-////        //instructionHeight += ceilf([cell.instructionTextView sizeThatFits:CGSizeMake(cell.instructionTextView.frame.size.width, FLT_MAX)].height + 12 + 12); //12 and 12 for top and bottom buffer space.
-//////        //NSLog(@"Returning: %f", instructionHeight);
-//////        return instructionHeight;
-////        return 46.0;
-////    }
-//    else {
-//        return 0;
-//    }
-//}
 
 -(void)deleteIngredientButtonTapped:(UIButton*)sender {
     [self.view endEditing:YES];
@@ -890,9 +810,6 @@
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
-    
-    
-    
 }
 
 -(void)deleteTagButtonTapped:(UIButton*)sender {
@@ -921,54 +838,41 @@
         
         RCPEditRecipeIngredientTableViewCell *cell = (RCPEditRecipeIngredientTableViewCell*)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RCPEditRecipeIngredientTableViewCell class])];
         RCPRecipeIngredient *recipeIngredient = [self.ingredientsArray objectAtIndex:indexPath.row];
-        
         cell.amountParentView.layer.cornerRadius = 10.0;
         cell.amountParentView.layer.borderWidth = 1.0;
         cell.amountParentView.layer.borderColor = [UIColor colorWithRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0].CGColor;
         cell.amountTextField.delegate = self;
-        
         cell.unitParentView.layer.cornerRadius = 10.0;
         cell.unitParentView.layer.borderWidth = 1.0;
         cell.unitParentView.layer.borderColor = [UIColor colorWithRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0].CGColor;
         cell.unitTextField.delegate = self;
         cell.unitTextField.inputView = self.pickerView;
         cell.unitTextField.inputAccessoryView = self.toolBar;
-        
         cell.ingredientParentView.layer.cornerRadius = 10.0;
         cell.ingredientParentView.layer.borderWidth = 1.0;
         cell.ingredientParentView.layer.borderColor = [UIColor colorWithRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0].CGColor;
         cell.ingredientTextField.delegate = self;
-        
-        
         cell.amountTextField.tag = indexPath.row;
         cell.unitTextField.tag = indexPath.row;
         cell.ingredientTextField.tag = indexPath.row;
-        
         cell.amountTextField.text = recipeIngredient.ingredientQuantity;
         cell.unitTextField.text = recipeIngredient.ingredientMeasurement;
         cell.ingredientTextField.text = recipeIngredient.ingredient.ingredientName;
-        
         cell.xDeleteImageView.transform = CGAffineTransformIdentity;
         cell.xDeleteImageView.transform = CGAffineTransformRotate(cell.xDeleteImageView.transform, M_PI_4);
-        
         cell.deleteOverlayButton.tag = indexPath.row;
         [cell.deleteOverlayButton addTarget:self action:@selector(deleteIngredientButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
         return cell;
-        
     }
     else if ([tableView isEqual:self.instructionsTableView]){
         
         RCPEditRecipeInstructionTableViewCell *cell = (RCPEditRecipeInstructionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RCPEditRecipeInstructionTableViewCell class])];
         RCPRecipeInstruction *instruction = [self.instructionsArray objectAtIndex:indexPath.row];
-        
         cell.stepNumberLabel.text = [NSString stringWithFormat:@"Step %@", instruction.instructionNumber];
-        
         cell.instructionParentView.layer.cornerRadius = 10.0;
         cell.instructionParentView.layer.borderWidth = 1.0;
         cell.instructionParentView.layer.borderColor = [UIColor colorWithRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0].CGColor;
         
-        //cell.instructionTextView.text = instruction.instructionText.length > 0 ? instruction.instructionText : @"";
         if (instruction.instructionText.length > 0){
             cell.instructionTextView.text = instruction.instructionText;
         }
@@ -980,35 +884,27 @@
         cell.instructionTextView.textContainerInset = UIEdgeInsetsZero;
         cell.instructionTextView.textContainer.lineFragmentPadding = 0;
         cell.instructionTextView.tag = indexPath.row;
-        
         cell.xDeleteImageView.transform = CGAffineTransformIdentity;
         cell.xDeleteImageView.transform = CGAffineTransformRotate(cell.xDeleteImageView.transform, M_PI_4);
-        
         cell.deleteOverlayButton.tag = indexPath.row;
         [cell.deleteOverlayButton addTarget:self action:@selector(deleteInstructionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
         return cell;
     }
     else if ([tableView isEqual:self.tagsTableView]){
         
         RCPEditRecipeTagTableViewCell *cell = (RCPEditRecipeTagTableViewCell*)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RCPEditRecipeTagTableViewCell class])];
         RCPRecipeTag *recipeTag = [self.tagsArray objectAtIndex:indexPath.row];
-        
         cell.tagParentView.layer.cornerRadius = 10.0;
         cell.tagParentView.layer.borderWidth = 1.0;
         cell.tagParentView.layer.borderColor = [UIColor colorWithRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0].CGColor;
         cell.tagTextField.text = recipeTag.tagString;
         cell.tagTextField.delegate = self;
         cell.tagTextField.tag = indexPath.row;
-        
         cell.xDeleteImageView.transform = CGAffineTransformIdentity;
         cell.xDeleteImageView.transform = CGAffineTransformRotate(cell.xDeleteImageView.transform, M_PI_4);
-        
         cell.deleteOverlayButton.tag = indexPath.row;
         [cell.deleteOverlayButton addTarget:self action:@selector(deleteTagButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
         return cell;
-        
     }
     else {
         return nil;
@@ -1037,8 +933,6 @@
         
         RCPEditRecipeIngredientTableViewCell *editingCell = [self.ingredientsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.editingIngredientRow inSection:0]];
         editingCell.unitTextField.text = self.editingIngredient.ingredientMeasurement;
-        //[self.ingredientsTableView reloadData];
-        //NSLog(@"Set to: %@", [self.pickerViewArray objectAtIndex:row]);
     }
     else {
         //NSLog(@"Could not find editing ingredient!");
@@ -1049,19 +943,12 @@
     return [self.pickerViewArray objectAtIndex:row];
 }
 
-
-
-
-
 #pragma mark - UITextField Delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     //NSLog(@"Text field did begin editing.");
-    
     if (![textField isEqual:self.recipeNameTextField]){
-        
         float originY = 0.0;
         if ([textField isKindOfClass:[RCPIngredientTextField class]]){
-         
             CGRect rectOfCellInTableView = [self.ingredientsTableView rectForRowAtIndexPath: [NSIndexPath indexPathForRow:textField.tag inSection:0]];
             CGRect rectOfCellInSuperview = [self.ingredientsTableView convertRect: rectOfCellInTableView toView: self.ingredientsTableView.superview];
             //NSLog(@"Y of Cell is: %f", rectOfCellInSuperview.origin.y);
@@ -1074,7 +961,6 @@
             originY = self.tagsParentView.frame.origin.y + rectOfCellInTableView.origin.y;
         }
         
-        
         //NSLog(@"Scroll to: %f", originY);
         CGPoint scrollPoint = CGPointMake(0, originY);
         self.previousOffset = [self.scrollView contentOffset];
@@ -1086,21 +972,14 @@
         // Add a "buffer" at the bottom of the table
         [self.scrollView setContentInset:UIEdgeInsetsMake(0, 0, self.keyboardHeight, 0)];
     }
-    
     self.editingIngredientRow = textField.tag;
-    
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     //NSLog(@"Text field did end editing.");
-    
     //Scroll
     [self.scrollView setContentOffset:CGPointMake(0, self.previousOffset.y)];
-    //[self.scrollView setContentOffset:CGPointMake(0, self.previousOffset.y)];
-    //[self.scrollView setContentOffset:CGPointMake(0, -self.scrollView.contentInset.top)];
     [self.scrollView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    
-    
     
     if ([textField isEqual:self.recipeNameTextField]){
         self.recipe.recipeName = self.recipeNameTextField.text.length > 0 ? self.recipeNameTextField.text : @"";
@@ -1122,10 +1001,7 @@
             RCPRecipeIngredient *editingIngredient = [self.ingredientsArray objectAtIndex:textField.tag];
             editingIngredient.ingredient.ingredientName = textField.text;
         }
-        
-        
     }
-
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -1135,7 +1011,6 @@
 
 #pragma mark - UITextView Delegate
 -(void)textViewDidChange:(UITextView *)textView {
-    
     if ([textView isEqual:self.notesTextView]){
         self.recipe.recipeNotes = textView.text;
         [self reloadNotes];
@@ -1177,37 +1052,15 @@
     // Add a "buffer" at the bottom of the table
     [self.scrollView setContentInset:UIEdgeInsetsMake(0, 0, self.keyboardHeight, 0)];
     
-    
-    
-//    if (![textView isEqual:self.recipeNameTextField]){
-//        float originY = textView.superview.superview.frame.origin.y;
-//        //NSLog(@"Scroll to: %f", originY);
-//        CGPoint scrollPoint = CGPointMake(0, originY);
-//        self.previousOffset = [self.scrollView contentOffset];
-//
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.scrollView setContentOffset:scrollPoint animated:NO];
-//        }];
-//
-//        // Add a "buffer" at the bottom of the table
-//        [self.scrollView setContentInset:UIEdgeInsetsMake(0, 0, self.keyboardHeight, 0)];
-//    }
-    
     if ([textView.text isEqualToString:@"Enter recipe instructions"]){
         textView.text = @"";
     }
-    
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
     //NSLog(@"Text view did end editing.");
-    
     //Scroll
-//    [UIView animateWithDuration:0.3 animations:^{
-        [self.scrollView setContentOffset:CGPointMake(0, self.previousOffset.y)];
-//    }];
-    //[self.scrollView setContentOffset:CGPointMake(0, self.previousOffset.y)];
-    //[self.scrollView setContentOffset:CGPointMake(0, -self.scrollView.contentInset.top)];
+    [self.scrollView setContentOffset:CGPointMake(0, self.previousOffset.y)];
     [self.scrollView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     if ([textView isEqual:self.notesTextView]){
@@ -1222,13 +1075,10 @@
     }
 }
 
-
-
 #pragma mark - UIImagePickerController Delegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *pickedImage;
-    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
@@ -1237,49 +1087,25 @@
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-//    NSData *imgData = UIImagePNGRepresentation(self.defaultImageImageView.image);
-    
-//    NSString *imageSize = [NSByteCountFormatter stringFromByteCount:imgData.length countStyle:NSByteCountFormatterCountStyleFile];
-//    //NSLog(@"File Size: %@",imageSize);
-    
-    
-    
-    
-    
     //Get NSData from the image selected.
     NSData *jpegData10Data = UIImageJPEGRepresentation(pickedImage, 0.1);
     //NSLog(@"Image Size (JPEG 10): %@",[NSByteCountFormatter stringFromByteCount:jpegData10Data.length countStyle:NSByteCountFormatterCountStyleFile]);
-    
-
-    
-    
-    
-    
-    
-    
     
     NSString *imageName = [[NSDateFormatter imageNameTimestampFormatter] stringFromDate:[NSDate date]];
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
-    
     [jpegData10Data writeToFile:fullPathToFile atomically:NO];
-    
-    //self.recipe.recipeImageName = imageName;
-    
+
     RCPRecipeImage *newRecipeImage = [RCPRecipeImage MR_createEntityInContext:self.contextToUse];
     newRecipeImage.recipeImageName = imageName;
     [self.recipe addImagesObject:newRecipeImage];
-    
     [self reloadRecipeImages];
-    
     //NSLog(@"fullPathToFile %@", fullPathToFile);
 }
 
 - (IBAction)photoButtonTapped:(UIButton *)sender {
-    
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
@@ -1288,7 +1114,6 @@
     else {
         picker.allowsEditing = YES;
     }
-    
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         //NSLog(@"Canceled.");
@@ -1300,9 +1125,7 @@
     
     if (isCameraPresent) {
         takePhotoAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            
             // Add overlay view with custom button on it. Set frames to button as per your choice.
             UIView *viewOverlay = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, 0, 100, 40)];
             UIButton *photoLibraryButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
@@ -1316,27 +1139,13 @@
         //NSLog(@"Camera not available.");
     }
     UIAlertAction *choosePhotoAction = [UIAlertAction actionWithTitle:@"Choose Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
         picker.modalPresentationStyle = UIModalPresentationPopover;
         UIPopoverPresentationController *controller = [picker popoverPresentationController];
         controller.sourceView = sender;
         controller.sourceRect = sender.bounds;
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self presentViewController:picker animated:YES completion:nil];
         });
-        
-        
-        
-//        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//        picker.delegate = self;
-//        picker.allowsEditing = YES;
-//        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        [self presentViewController:picker animated:YES completion:nil];
-        
-        
-        
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -1377,9 +1186,6 @@
     
     //Reload categories
     [self reloadCategories];
-    
 }
-
-
 
 @end

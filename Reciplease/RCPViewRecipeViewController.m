@@ -49,7 +49,6 @@
 //Favorite
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteHeartImageView;
 
-
 //Constraints For Parent Views
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleParentViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *categoriesParentViewHeightConstraint;
@@ -60,7 +59,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tagsParentViewHeightConstraint;
 
 //Recipe Parent Views (Title, Categories, Ingredients, Instructions, Images, Notes, Tags)
-
 //Title
 @property (weak, nonatomic) IBOutlet UIView *titleParentView;
 
@@ -99,7 +97,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //NSLog(@"%@ - viewDidLoad", NSStringFromClass(self.class));
     [self setupTableViews];
     [self setupCollectionViews];
     [self setupXButton];
@@ -113,8 +110,6 @@
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
-    //NSLog(@"View did layout subviews.");
     
     //Recipe Name
     //Set the constraint height of the text view's parent view to fit the required size needed to display the full name.
@@ -143,8 +138,6 @@
         totalStepsParentViewHeight += determinedHeight;
     }
     self.instructionsParentViewHeightConstraint.constant = 49 + 35 + totalStepsParentViewHeight;
-    //NSLog(@"height set to: %f", self.instructionsParentViewHeightConstraint.constant);
-    
     
     //Images (If any exist, has height, otherwise 0 height.)
     self.imagesParentViewHeightConstraint.constant = self.imagesArray.count > 0 ? 140 : 0;
@@ -185,9 +178,9 @@
     [self reloadIngredients];
     [self reloadInstructions];
     [self reloadRecipeImages];
+    
     //Recipe Cover Image
     [self reloadDefaultRecipeImage];
-    
     
     //Rating
     NSInteger rating = self.recipe.recipeRating;
@@ -287,16 +280,6 @@
 }
 
 #pragma mark - UITableView Delegate
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([tableView isEqual:self.ingredientsTableView]){
-//        return 36.0;
-//    }
-////    else if ([tableView isEqual:self.instructionsTableView]){
-////        return 36.0;
-////    }
-//    return 0;
-//}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -339,19 +322,13 @@
     else {
         RCPRecipeInstructionTableViewCell *cell = (RCPRecipeInstructionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([RCPRecipeInstructionTableViewCell class])];
         RCPRecipeInstruction *instruction = [self.instructionsArray objectAtIndex:indexPath.row];
-        
         NSString *instructionNumber = instruction.instructionNumber ? [NSString stringWithFormat:@"%@. ", instruction.instructionNumber] : @"";
-        
         cell.instructionsTextView.text = instruction.instructionText.length > 0 ? [NSString stringWithFormat:@"%@%@", instructionNumber, instruction.instructionText] : @"";
         cell.instructionsTextView.textContainerInset = UIEdgeInsetsZero;
         cell.instructionsTextView.textContainer.lineFragmentPadding = 0;
-        
-        
-        
         cell.instructionsTextView.editable = NO;
         cell.instructionsTextView.delegate = self;
         cell.instructionsTextView.tag = indexPath.row;
-        
         [cell updateConstraintsIfNeeded];
         return cell;
     }
@@ -359,10 +336,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"tableView:didSelectRowAtIndexPath: %@ (Row: %ld)", indexPath, (long)indexPath.row);
-    
 }
-
-
 
 #pragma mark - Button Actions
 - (IBAction)starButtonTapped:(UIButton *)sender {
@@ -387,8 +361,6 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
-
-
 - (IBAction)cancelButtonTapped:(UIButton *)sender {
     //NSLog(@"Cancel Recipe!");
     if ([self.delegate respondsToSelector:@selector(recipeClosed:)]){
@@ -405,14 +377,9 @@
 
 - (IBAction)editButtonTapped:(UIButton *)sender {
     //NSLog(@"Edit button tapped!");
-    
     //Need to present the RCPEditRecipeVC modally (edit mode).
-    
     [self performSegueWithIdentifier:@"viewToEdit" sender:self];
-    
 }
-
-
 
 - (IBAction)testConstraintButtonTapped:(UIButton *)sender {
     //Set the constraint height of the text view's parent view to fit the required size needed to display the full name.
@@ -421,11 +388,8 @@
 //    [self.recipeNameTextView layoutIfNeeded];
 //    [self.recipeNameTextView updateConstraints];
 //
-
     [self viewDidLayoutSubviews];
-    
 }
-
 
 #pragma mark - UICollectionView Delegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -437,10 +401,8 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     RCPRecipeImageCollectionViewCell *cell = (RCPRecipeImageCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([RCPRecipeImageCollectionViewCell class]) forIndexPath:indexPath];
     RCPRecipeImage *recipeImage = [self.imagesArray objectAtIndex:indexPath.row];
-    
     //NSLog(@"Loading image: %@", recipeImage.recipeImageName);
     UIImage *image = [UIImage imageNamed:recipeImage.recipeImageName];
     if (image){
@@ -460,33 +422,14 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"collectionView:didSelectItemAtIndexPath: %@ (Row: %ld)", indexPath, (long)indexPath.row);
-    
     self.selectedImageIndexPath = indexPath;
-    
-    
-    
-//    if (!self.imageDisplayVC){
-//        self.imageDisplayVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RCPImageDisplayViewController"];
-//        self.imageDisplayVC.delegate = self;
-//    }
-    
-    
     
     //Display full screen image viewer.
     [self performSegueWithIdentifier:@"viewRecipeImageSegue" sender:self];
-    
-    
-//    [self presentViewController:self.imageDisplayVC animated:YES completion:^{
-//        //NSLog(@"Presented!");
-//        //NSLog(@"Add category VC: %@", NSStringFromCGRect(self.imageDisplayVC.view.frame));
-//    }];
-    
-    
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([segue.identifier isEqualToString:@"viewToEdit"]){
         RCPEditRecipeViewController *editRecipeVC = [segue destinationViewController];
         [[RCPCoreDataManager sharedInstance] setupCreatingRecipeContext];
@@ -508,7 +451,6 @@
         imageVC.delegate = self;
         imageVC.imageToDisplay = image;
     }
-    
 }
 
 #pragma mark - Edit Recipe Delegate
@@ -519,7 +461,6 @@
 
 -(void)recipeWasDeleted {
     //NSLog(@"Recipe was deleted.");
-
     if ([self.delegate respondsToSelector:@selector(recipeClosed:)]){
         [self.delegate recipeClosed:self.recipe];
     }
@@ -534,7 +475,6 @@
 
 #pragma mark - UITextView Delegate
 -(void)textViewDidChange:(UITextView *)textView {
-    
     if (self.instructionsArray.count > 0){
         RCPRecipeInstructionTableViewCell *instructionCell = (RCPRecipeInstructionTableViewCell*)[self.instructionsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textView.tag inSection:0]];
         if ([textView isEqual:instructionCell.instructionsTextView]){
@@ -543,28 +483,20 @@
             [self viewDidLayoutSubviews];
         }
     }
-    
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView {
     //NSLog(@"Text view did begin editing.");
-    
-    
-    
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
     //NSLog(@"Text view did end editing.");
-    
-    
-    
 }
 
 #pragma mark - RCPImageDisplayViewControllerDelegate
 -(void)imageDisplayViewTappedClose {
     //NSLog(@"Close.");
     [self.imageDisplayVC dismissViewControllerAnimated:YES completion:^{
-        
     }];
 }
 
