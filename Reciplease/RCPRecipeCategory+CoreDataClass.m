@@ -32,8 +32,6 @@
         category.categoryID = categoryIDFromDict ? categoryIDFromDict : @(-1);
         category.categoryName = categoryNameStringFromDict.length > 0 ? categoryNameStringFromDict : @"";
         category.imageName = imageNameFromDict.length > 0 ? imageNameFromDict : @"";
-        
-        
     }
     else {
         //NSLog(@"Recipe category dictionary not received in proper format.");

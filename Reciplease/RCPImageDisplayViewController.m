@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [self setupScrollView];
     self.imageView.image = self.imageToDisplay;
     self.imageParentView.layer.borderColor = [UIColor colorWithRed:36.0/255.0 green:36.0/255.0 blue:36.0/255.0 alpha:1].CGColor;
@@ -43,7 +42,6 @@
 }
 
 #pragma mark - Button Actions
-
 - (IBAction)closeButtonTapped:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(imageDisplayViewTappedClose)]){
         [self.delegate imageDisplayViewTappedClose];
@@ -53,7 +51,6 @@
     }
     
     [self dismissViewControllerAnimated:YES completion:^{
-    
     }];
 }
 

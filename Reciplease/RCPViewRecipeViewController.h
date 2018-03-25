@@ -11,12 +11,9 @@
 @protocol RCPViewRecipeViewControllerDelegate;
 
 @interface RCPViewRecipeViewController : UIViewController
-
 @property (nonatomic, strong) RCPRecipe *recipe;
 @property (weak, nonatomic) id<RCPViewRecipeViewControllerDelegate>delegate;
-
 @end
-
 
 @protocol RCPViewRecipeViewControllerDelegate <NSObject>
 @optional

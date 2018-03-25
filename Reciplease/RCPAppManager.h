@@ -31,22 +31,15 @@ typedef NS_ENUM(NSInteger, RCPRecipeIngredientMeasurementType) {
     RCPRecipeIngredientMeasurementTypeTeaspoon = 19,
 };
 
-
 @interface RCPAppManager : NSObject
 
 + (instancetype)sharedInstance;
 - (NSString*)stringWithEnum:(NSUInteger)enumVal;
 - (NSUInteger)enumFromString:(NSString*)strVal default:(NSUInteger)def;
 - (NSUInteger)enumFromString:(NSString*)strVal;
-
-
-
 - (NSString*) retrievePathForFilenameWithString:(NSString*)filename;
 
 @property (nonatomic, strong) NSMutableArray *appColorsArray;
 @property (nonatomic, strong) NSMutableArray *measurementTypesArray;
-
-
-
 
 @end

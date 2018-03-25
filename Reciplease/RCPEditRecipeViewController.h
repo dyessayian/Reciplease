@@ -11,12 +11,10 @@
 @protocol RCPEditRecipeViewControllerDelegate;
 
 @interface RCPEditRecipeViewController : UIViewController
-
 @property (nonatomic, strong) RCPRecipe *recipe;
 @property (weak, nonatomic) id<RCPEditRecipeViewControllerDelegate>delegate;
 @property (nonatomic) BOOL addingRecipe;
 @property (nonatomic) BOOL editingRecipe;
-
 @end
 
 @protocol RCPEditRecipeViewControllerDelegate <NSObject>

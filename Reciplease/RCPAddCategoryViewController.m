@@ -67,7 +67,6 @@
     }
 }
 
-
 -(void)setupXCloseButton {
     self.cancelButton.transform = CGAffineTransformRotate(self.cancelButton.transform, M_PI_4);
 }
@@ -83,12 +82,8 @@
 }
 
 -(void)setupCollectionView {
-    
     self.categoryImagesArray = [NSMutableArray new];
     
-//    [self.categoryImagesArray addObjectsFromArray:@[@"category_all", @"category_american", @"category_chinese", @"category_cocktails", @"category_french", @"category_italian", @"category_japanese", @"category_mexican"]];
-    
-
     //Add Category_1 assets.
     for (int i = 1; i < 160; i++){
         [self.categoryImagesArray addObject:[NSString stringWithFormat:@"category_final_%d", i]];
@@ -98,15 +93,11 @@
     }
     
     [self.addCategoryCollectionView registerNib:[UINib nibWithNibName:@"RCPAddCategoryCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:NSStringFromClass([RCPAddCategoryCollectionViewCell class])];
-    
-
-    
 }
 
 #pragma mark - Button Events
 - (IBAction)cancelButtonTapped:(UIButton *)sender {
     //NSLog(@"Cancel Category!");
-    
     [self dismissViewControllerAnimated:YES completion:^{
         //NSLog(@"Dismissed add category view controller.");
     }];
@@ -114,13 +105,10 @@
 
 - (IBAction)addButtonTapped:(UIButton *)sender {
     //NSLog(@"Add Category!");
-    
     if (self.categoryNameTextField.text.length > 0){
-        
         if (self.selectedIconIndexPath != nil){
             //Add check for existing category matching the name, and prevent.
             RCPRecipeCategory *category = [RCPRecipeCategory MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"categoryName ==[cd] %@", self.categoryNameTextField.text]];
-            //RCPRecipeCategory *category = [RCPRecipeCategory MR_findFirstByAttribute:@"categoryName" withValue:self.categoryNameTextField.text];
             if (category){
                 UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Category Exists" message:[NSString stringWithFormat:@"A category already exists with that name, please try another."] preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {  }];
@@ -128,7 +116,6 @@
                 [self presentViewController:alertController animated:YES completion:nil];
             }
             else {
-
                 //Determine the upcoming ID for this category.
                 NSArray *allCategories = [RCPRecipeCategory MR_findAll];
                 NSNumber *newCategoryID = @([[[allCategories valueForKey:@"categoryID"] valueForKeyPath:@"@max.intValue"] integerValue] + 1);
@@ -177,15 +164,9 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     RCPAddCategoryCollectionViewCell *cell = (RCPAddCategoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([RCPAddCategoryCollectionViewCell class]) forIndexPath:indexPath];
-    
     NSString *imageNameString = [self.categoryImagesArray objectAtIndex:indexPath.row];
     cell.addCategoryImageView.image = [UIImage imageNamed:imageNameString];
-    
-    //cell.colorLabel.backgroundColor = [[RCPAppManager sharedInstance].appColorsArray objectAtIndex:indexPath.row % [RCPAppManager sharedInstance].appColorsArray.count];
-//    cell.colorLabel.layer.cornerRadius = cell.colorLabel.frame.size.height / 2;
-    
     if ([indexPath isEqual:self.selectedIconIndexPath]){
         //cell.backgroundColor = [UIColor blackColor];
         cell.addCategoryImageView.tintColor = [UIColor colorNamed:@"azulColor"];
@@ -194,7 +175,6 @@
         //cell.backgroundColor = [UIColor clearColor];
         cell.addCategoryImageView.tintColor = [UIColor blackColor];
     }
-    
     return cell;
 }
 

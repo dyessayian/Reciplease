@@ -11,11 +11,8 @@
 @protocol RCPImageDisplayViewControllerDelegate;
 
 @interface RCPImageDisplayViewController : UIViewController
-
 @property (nonatomic) id<RCPImageDisplayViewControllerDelegate> delegate;
-
 @property (nonatomic, strong) UIImage *imageToDisplay;
-
 @end
 
 @protocol RCPImageDisplayViewControllerDelegate <NSObject>
